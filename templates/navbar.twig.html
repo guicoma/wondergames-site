@@ -1,0 +1,244 @@
+{% if session['user_id'] %}
+
+{% else %}
+    <nav class="navbar is-link is-fixed-top" role="navigation" aria-label="main navigation">
+        <div class="navbar-brand">
+            <a class="navbar-item" href="/">
+                <img src="/img/wonder.svg" height="80">
+            </a>
+
+            <a role="button" class="navbar-burger" aria-label="menu" aria-expanded="false" data-target="navbarBasicExample">
+                <span aria-hidden="true"></span>
+                <span aria-hidden="true"></span>
+                <span aria-hidden="true"></span>
+            </a>
+        </div>
+
+        <div id="navbarBasicExample" class="navbar-menu">
+            <div class="navbar-start">
+                <div class="navbar-item has-dropdown is-hoverable">
+                    <a href="/events" class="navbar-link is-arrowless">Eventos</a>
+                    <div class="navbar-dropdown">
+                        <a href="/events#tournaments" class="navbar-item">Torneos</a>
+                        <a href="/events#animenight" class="navbar-item">Anime Night</a>
+                    </div>
+                </div>
+                <a href="/community" class="navbar-item">Comunidad</a>
+                <a href="https://wondergames.gitbook.io/reviews/" target="_blank" class="navbar-item">Reviews</a>
+                <!-- <a class="navbar-item">Tienda</a> -->
+                <!-- <a class="navbar-item">Sobre nosotros</a> -->
+            </div>
+
+            <div class="navbar-end">
+                <div class="navbar-item">
+                    <a href="https://discord.gg/bDRQzPG" target="_blank">
+                        <button class="button is-rounded">
+                            <i class="fa-brands fa-discord"></i>
+                            <span>Discord</span>
+                        </button>
+                    </a>
+                </div>
+                <div class="navbar-item">
+                    <div class="buttons">
+                        <a class="button is-link js-modal-trigger" data-target="sign-up-modal">
+                            <strong>Sign up</strong>
+                        </a>
+                        <div class="dropdown">
+                            <div class="dropdown-trigger">
+                                <button class="button" aria-haspopup="true" aria-controls="dropdown-menu2">
+                                    <span>Login</span>
+                                </button>
+                            </div>
+                            <div class="dropdown-menu" id="dropdown-menu2" role="menu">
+                                <div class="dropdown-content">
+                                    <div class="dropdown-item">
+                                        HI
+                                        <!-- <div class="field">
+                                            <p class="control has-icons-left has-icons-right">
+                                                <input class="input" type="email" placeholder="Email">
+                                                <span class="icon is-small is-left">
+                                                <i class="fas fa-envelope"></i>
+                                                </span>
+                                                <span class="icon is-small is-right">
+                                                <i class="fas fa-check"></i>
+                                                </span>
+                                            </p>
+                                        </div>
+                                        <div class="field">
+                                            <p class="control has-icons-left">
+                                                <input class="input" type="password" placeholder="Password">
+                                                <span class="icon is-small is-left">
+                                                <i class="fas fa-lock"></i>
+                                                </span>
+                                            </p>
+                                        </div>
+                                        <div class="field">
+                                            <p class="control">
+                                                <button class="button is-success">
+                                                Login
+                                                </button>
+                                            </p>
+                                        </div> -->
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </nav>
+{% endif %}
+
+<div id="sign-up-modal" class="modal">
+    <div class="modal-background"></div>
+    <div class="modal-content">
+        <div class="box">
+            <h1 class="title">Sign up</h1>
+            <div class="field">
+                <label class="label">Name</label>
+                <div class="control">
+                    <input class="input" type="text" placeholder="Text input">
+                </div>
+            </div>
+            
+            <div class="field">
+                <label class="label">Username</label>
+                <div class="control has-icons-left has-icons-right">
+                    <input class="input is-success" type="text" placeholder="Text input" value="bulma">
+                    <span class="icon is-small is-left">
+                        <i class="fas fa-user"></i>
+                    </span>
+                    <span class="icon is-small is-right">
+                        <i class="fas fa-check"></i>
+                    </span>
+                </div>
+                <p class="help is-success">This username is available</p>
+            </div>
+            
+            <div class="field">
+                <label class="label">Password</label>
+                <div class="control has-icons-left has-icons-right">
+                <input class="input is-danger" type="password" placeholder="Email input" />
+                <span class="icon is-small is-left">
+                    <i class="fas fa-envelope"></i>
+                </span>
+                <span class="icon is-small is-right">
+                    <i class="fas fa-exclamation-triangle"></i>
+                </span>
+                </div>
+                <p class="help is-danger">This email is invalid</p>
+            </div>
+            
+            <div class="field">
+                <div class="control">
+                    <label class="checkbox">
+                    <input type="checkbox">
+                    I agree to the <a href="#">terms and conditions</a>
+                    </label>
+                </div>
+            </div>
+    
+            <div class="field is-grouped">
+                <div class="control">
+                    <button class="button is-link">Submit</button>
+                </div>
+                <div class="control">
+                    <button class="button is-link is-light">Cancel</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <button class="modal-close is-large" aria-label="close"></button>
+</div>
+
+
+<div id="login-modal" class="modal">
+    <div class="modal-background"></div>
+    <div class="modal-content">
+        <div class="box">
+            <h1 class="title">Login</h1>
+            
+            <div class="field">
+                <label class="label">Username</label>
+                <div class="control has-icons-left has-icons-right">
+                    <input class="input is-success" type="text" placeholder="Text input" value="bulma">
+                    <span class="icon is-small is-left">
+                        <i class="fas fa-user"></i>
+                    </span>
+                    <span class="icon is-small is-right">
+                        <i class="fas fa-check"></i>
+                    </span>
+                </div>
+                <!-- <p class="help is-success">This username is available</p> -->
+            </div>
+            
+            <div class="field">
+                <label class="label">Password</label>
+                <div class="control has-icons-left has-icons-right">
+                <input class="input is-danger" type="password" placeholder="Email input" />
+                <span class="icon is-small is-left">
+                    <i class="fas fa-envelope"></i>
+                </span>
+                <span class="icon is-small is-right">
+                    <i class="fas fa-exclamation-triangle"></i>
+                </span>
+                </div>
+                <p class="help is-danger">This email is invalid</p>
+            </div>
+            
+            <div class="field is-grouped">
+                <div class="control">
+                    <button class="button is-link">Login</button>
+                </div>
+                <div class="control">
+                    <button class="button is-link is-light">Cancel</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <button class="modal-close is-large" aria-label="close"></button>
+</div>
+
+
+<script>
+    document.addEventListener('DOMContentLoaded', () => {
+        // Functions to open and close a modal
+        function openModal($el) { $el.classList.add('is-active'); }
+        function closeModal($el) { $el.classList.remove('is-active'); }
+
+        function closeAllModals() {
+            (document.querySelectorAll('.modal') || []).forEach(($modal) => {
+                closeModal($modal);
+            });
+        }
+
+        // Add a click event on buttons to open a specific modal
+        (document.querySelectorAll('.js-modal-trigger') || []).forEach(($trigger) => {
+            const modal = $trigger.dataset.target;
+            const $target = document.getElementById(modal);
+
+            $trigger.addEventListener('click', () => {
+                openModal($target);
+            });
+        });
+
+        // Add a click event on various child elements to close the parent modal
+        (document.querySelectorAll('.modal-background, .modal-close, .modal-card-head .delete, .modal-card-foot .button') || []).forEach(($close) => {
+            const $target = $close.closest('.modal');
+
+            $close.addEventListener('click', () => {
+                closeModal($target);
+            });
+        });
+
+        // Add a keyboard event to close all modals
+        document.addEventListener('keydown', (event) => {
+            const e = event || window.event;
+
+            if (e.keyCode === 27) { // Escape key
+                closeAllModals();
+            }
+        });
+    });
+</script>

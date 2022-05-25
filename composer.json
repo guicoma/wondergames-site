@@ -1,0 +1,27 @@
+{
+  "name": "coma/wonderpage",
+  "description": "Webpage for wondergames community",
+  "type": "project",
+  "autoload": {
+    "psr-4": {
+      "Wondergames\\Site\\": "src/"
+    }
+  },
+  "authors": [
+    {
+      "name": "Guillem Coma",
+      "email": "guillemcoma@gmail.com"
+    }
+  ],
+  "require": {
+    "ext-pdo": "*",
+    "slim/slim": "4.*",
+    "slim/psr7": "^1.3",
+    "php-di/slim-bridge": "^3.1",
+    "dflydev/fig-cookies": "^3.0",
+    "symfony/dotenv": "^5.2",
+    "slim/twig-view": "^3.2",
+    "ext-json": "*",
+    "guzzlehttp/guzzle": "^7.4"
+  }
+}

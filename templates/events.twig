@@ -1,0 +1,132 @@
+{% extends 'base.twig' %}
+
+{% block title %}Wondergames - Eventos{% endblock %}
+
+{% block content %}
+  <section class="hero is-medium is-info">
+    <div class="hero-body">
+      <p class="title is-1">Eventos</p>
+      <p class="subtitle is-3">Me gustan los wonderianos...<br>hacen cosas.</p>
+    </div>
+  </section>
+  <section class="section">
+    <div class="columns">
+      <div class="column">
+        <aside class="menu">
+          <p class="menu-label">Eventos</p>
+          <ul class="menu-list">
+            <li><a href="#tournaments">Torneos</a></li>
+            <li><a href="#animenight">Anime Night</a></li>
+          </ul>
+        </aside>
+      </div>
+      <div class="column is-four-fifths">
+        <section id="tournaments" class="block">
+          <h1 class="title is-2">Torneos</h1>
+          <p class="subtitle is-5">Los torneos </p>
+          {% if challongeData %}
+            <div class="columns is-mobile is-flex is-flex-wrap-wrap">
+            {% for tournament in challongeData|sort((a, b) => b.tournament.created_at <=> a.tournament.created_at)  %}
+              <div class="column is-one-third">
+                <div class="card">
+                  <div class="card-content">
+                    <p class="title is-5">{{ tournament.tournament.name }}</p>
+                    <p class="subtitle is-6">
+                      <small>
+                        <i class="fa-solid fa-gamepad fa-fw has-text-info" aria-hidden="true"></i>
+                        <span>{{ tournament.tournament.game_name }}</span>
+                        <br>
+                        <i class="fa fa-calendar-o fa-fw has-text-info" aria-hidden="true"></i>
+                        <time datetime="2016-1-1">{{ tournament.tournament.started_at|date("d/m/Y") }}</time>
+                      </small>
+                    </p>
+                    <!-- <div class="content is-small" style="white-space: nowrap; overflow: hidden; text-overflow: ellipsis; max-height: 250px;">
+                      {{tournament.tournament.description|raw}}
+                    </div> -->
+                    <p class="has-text-left">
+                      <span>
+                        Ver en <a href="{{ tournament.tournament.full_challonge_url }}" target="_blank">Challonge</a>
+                      </span>
+                    </p>
+                  </div>
+                  <!-- <footer class="card-footer">
+                    <p class="card-footer-item has-text-left">
+                      <span>
+                        Ver en <a href="{{ tournament.tournament.full_challonge_url }}" target="_blank">Challonge</a>
+                      </span>
+                    </p>
+                  </footer> -->
+                </div>
+              </div>
+            {% endfor %}
+            </div>
+          {% endif %}
+        </section>
+        <hr>
+        <section id="animenight" class="block">
+          <h1 class="title is-2">Anime Night</h1>
+          <p class="subtitle is-5">Noches de visionado de animes, escogidos al azar.</p>
+          <div class="content">
+            <p>Aquí tienes un listado de los animes ya visionados y también también planeados.</p>
+            {% if aniData %}
+              {% for list in aniData['data']['MediaListCollection']['lists'] %}
+                {% if list.status == "CURRENT" %}
+                <h2 class="title is-4">Viendo ahora mismo:</h2>
+                  {% for anime in list.entries %}
+                    <div class="box has-background-link-light">
+                      <article class="media">
+                        <div class="media-left">
+                          <img src={{anime.media.coverImage.large}} style="border-radius: 3px;" alt="Cover image">
+                        </div>
+                        <div class="media-content">
+                          <div class="content is-small is-flex is-flex-direction-column" style="height: 100%;">
+                            <h1><strong>{{ anime.media.title.english }}</strong> | <i>{{ anime.media.title.romaji }}</i>  <small>{{ anime.media.episodes }}</small></h1>
+                            <p>{{ anime.media.description|raw }}</p>
+                            <p class="mt-5">
+                              Visto: {{anime.progress}}/{{anime.media.episodes}}
+                              <progress class="progress is-link" value="{{anime.progress}}" max="{{anime.media.episodes}}"></progress>
+                            </p>
+                          </div>
+                        </div>
+                      </article>
+                    </div>
+                  {% endfor %}
+                {% endif %}
+              {% endfor %}
+            {% endif %}
+            {% if aniData %}
+              {% for list in aniData['data']['MediaListCollection']['lists'] %}
+                {% if list.status == "COMPLETED" %}
+                  <h2 class="title is-4">Visto hasta ahora:</h2>
+                  <table class="table is-bordered is-narrow is-striped is-hoverable is-fullwidth">
+                    <thead>
+                      <tr>
+                        <th>Anime</th>
+                        <th><abbr title="episodios">Episodios</abbr></th>
+                        <th><abbr title="Puntuación">Puntuación</abbr></th>
+                      </tr>
+                    </thead>
+                    <tfoot>
+                      <tr>
+                        <th colspan="3" class="text-right is-size-7 is-italic has-text-right has-text-grey-light">Datos recopilados desde la plataform de anilist.co</th>
+                      </tr>
+                    </tfoot>
+                    <tbody>
+                      {% for anime in list.entries %}
+                        <tr>
+                          <td><small><strong>{{ anime.media.title.english }}</strong> | <i>{{ anime.media.title.romaji }}</i></small></td>
+                          <td>{{ anime.media.episodes }}</td>
+                          <td>{{ anime.media.averageScore }}</td>
+                        </tr>
+                      {% endfor %}
+                    </tbody>
+                  </table>
+                {% endif %}
+              {% endfor %}
+            {% endif %}
+          </div>
+        </section>
+      </div>
+    </div>
+  </section>
+{% endblock %}
