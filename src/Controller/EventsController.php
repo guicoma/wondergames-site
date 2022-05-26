@@ -78,16 +78,21 @@ final class EventsController
             "username" => "Wondergames"
         ];
 
-        $aniData = @file_get_contents('https://graphql.anilist.co', false, stream_context_create([
-            'http' => [
-                'method' => 'POST',
-                'header' => ['Content-Type: application/json'],
-                'content' => json_encode(['query' => $query, 'variables' => $variables]),
-            ]
-        ]));
-        $aniData = json_decode($aniData, true);
+        try {
+            $aniData = @file_get_contents('https://graphql.anilist.co', false, stream_context_create([
+                'http' => [
+                    'method' => 'POST',
+                    'header' => ['Content-Type: application/json'],
+                    'content' => json_encode(['query' => $query, 'variables' => $variables]),
+                ]
+            ]));
+            $aniData = json_decode($aniData, true);
+        } catch (\Throwable $th) {
+            echo "Error API anilist request";
+            $aniData = [];
+        }
 
-        // try {
+        try {
             $apiChallonge = 'https://api.challonge.com/v1/tournaments.json';
             $params = [
                 'header' => ['Content-Type: application/json'],
@@ -98,9 +103,10 @@ final class EventsController
                 ]
             ];
             $challongeData = $this->http->get($apiChallonge, $params);
-        // } catch (\Throwable $th) {
-        //     $challongeData = [];
-        // }
+        } catch (\Throwable $th) {
+            echo "Error API challonge request";
+            $challongeData = [];
+        }
 
         $challongeData = json_decode($challongeData->getBody()->getContents(), true);
 
